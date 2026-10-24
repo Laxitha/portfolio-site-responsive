@@ -1,0 +1,15 @@
+.git
+.git/**
+.github
+.github/**
+.gitignore
+.assetsignore
+.ignore
+*.zip
+*.tmp
+scratch
+scratch/**
+scratch_frames
+scratch_frames/**
+original_*
+README.md

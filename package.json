@@ -1,0 +1,8 @@
+{
+  "name": "portfolio-site-responsive",
+  "version": "1.0.0",
+  "description": "Watch Dogs cybersecurity portfolio for Laxitha Sridhar",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r index.html css js frames hero-video.mp4 archangel.mp3 Laxitha_Sridhar_Resume.pdf Tumblr.gif dist/"
+  }
+}

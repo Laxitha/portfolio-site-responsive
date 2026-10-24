@@ -4,3 +4,5 @@ scratch/
 scratch_frames/
 *.zip
 *.tmp
+dist/
+node_modules/
