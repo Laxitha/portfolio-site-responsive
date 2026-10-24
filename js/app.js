@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTerminalDispatch();
     initNavigationTracker();
     initResumeDock();
+    initRestrainedCursorGlow();
 });
 
 /* ==========================================================================
@@ -303,13 +304,13 @@ function initHolographicCyberpunkBackground() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x03070a, 0.0022);
+    scene.fog = new THREE.FogExp2(0x090A0B, 0.002);
 
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1200);
     camera.position.set(0, 20, 260);
 
     // --------------------------------------------------------------------------
-    // A. 3D HOLOGRAPHIC CYBER-KOI (SWIMMING SINUOUS BIO-LATTICE)
+    // A. 3D HOLOGRAPHIC BIO-LATTICE (CINEMATIC RESTRAINT PALETTE)
     // --------------------------------------------------------------------------
     const koiGroup = new THREE.Group();
     scene.add(koiGroup);
@@ -319,23 +320,22 @@ function initHolographicCyberpunkBackground() {
     const bodyRings = [];
     const spinePoints = [];
 
-    const cyanColor = new THREE.Color(0x00f0ff);
-    const magentaColor = new THREE.Color(0xff2a85);
-    const amberColor = new THREE.Color(0xff9d00);
+    const accentColor = new THREE.Color(0xD63384);   // Magenta #D63384
+    const oliveColor = new THREE.Color(0xA7A995);    // Olive grey #A7A995
+    const warmWhiteColor = new THREE.Color(0xE6E4DF);// Warm white #E6E4DF
 
     for (let i = 0; i < SEGMENTS; i++) {
-        // Tapered radius: head -> body peak -> tail
         const t = i / (SEGMENTS - 1);
         let radius = Math.sin(t * Math.PI) * 16;
-        if (i < 4) radius = 8 + i * 2; // Head taper
-        if (i > 18) radius = (SEGMENTS - i) * 1.8; // Tail taper
+        if (i < 4) radius = 8 + i * 2;
+        if (i > 18) radius = (SEGMENTS - i) * 1.8;
 
         const ringGeom = new THREE.RingGeometry(radius * 0.7, radius, 16, 1);
         const ringMat = new THREE.MeshBasicMaterial({
-            color: cyanColor,
+            color: accentColor,
             wireframe: true,
             transparent: true,
-            opacity: 0.85,
+            opacity: 0.7,
             blending: THREE.AdditiveBlending,
             side: THREE.DoubleSide
         });
@@ -352,9 +352,9 @@ function initHolographicCyberpunkBackground() {
     const longLinePositions = new Float32Array(LONG_COUNT * (SEGMENTS - 1) * 6);
     longitudinalLinesGeom.setAttribute('position', new THREE.BufferAttribute(longLinePositions, 3));
     const longLinesMat = new THREE.LineBasicMaterial({
-        color: cyanColor,
+        color: accentColor,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.5,
         blending: THREE.AdditiveBlending
     });
     const longitudinalMesh = new THREE.LineSegments(longitudinalLinesGeom, longLinesMat);
@@ -362,15 +362,14 @@ function initHolographicCyberpunkBackground() {
 
     // Glowing Holographic Fins (Pectoral Left, Right & Tail)
     function createFinGeometry(width, length, segments) {
-        const geom = new THREE.PlaneGeometry(width, length, segments, segments);
-        return geom;
+        return new THREE.PlaneGeometry(width, length, segments, segments);
     }
 
     const finMat = new THREE.MeshBasicMaterial({
-        color: 0x00f0ff,
+        color: accentColor,
         wireframe: true,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.65,
         blending: THREE.AdditiveBlending,
         side: THREE.DoubleSide
     });
@@ -396,18 +395,17 @@ function initHolographicCyberpunkBackground() {
     tailFan.rotation.x = Math.PI / 2;
     koiGroup.add(tailFan);
 
-    // Internal Bioluminescent Point Light
-    const koiLight = new THREE.PointLight(0x00f0ff, 2.5, 200);
+    // Internal Point Light
+    const koiLight = new THREE.PointLight(0xD63384, 1.8, 200);
     koiLight.position.set(0, 0, -40);
     koiGroup.add(koiLight);
 
     // --------------------------------------------------------------------------
-    // B. CYBER SKYSCRAPER MONOLITHS WITH VERTICAL NEON BILLBOARDS
+    // B. CHARCOAL ARCHITECTURAL MONOLITHS (#151719)
     // --------------------------------------------------------------------------
     const cityGroup = new THREE.Group();
     scene.add(cityGroup);
 
-    const buildingCount = 10;
     const buildingPositions = [
         [-240, -40, -180], [-310, 0, -320], [-190, 20, -420], [-270, -30, -560],
         [240, -40, -180], [310, 0, -320], [190, 20, -420], [270, -30, -560],
@@ -419,10 +417,10 @@ function initHolographicCyberpunkBackground() {
         const width = 60 + Math.random() * 40;
         const depth = 60 + Math.random() * 40;
 
-        // Dark obsidian tower body
+        // Charcoal tower body (#151719)
         const towerGeom = new THREE.BoxGeometry(width, height, depth);
         const towerMat = new THREE.MeshBasicMaterial({
-            color: 0x050c12,
+            color: 0x151719,
             wireframe: false
         });
         const tower = new THREE.Mesh(towerGeom, towerMat);
@@ -432,23 +430,23 @@ function initHolographicCyberpunkBackground() {
         // Tower Wireframe Edges
         const edgeGeom = new THREE.EdgesGeometry(towerGeom);
         const edgeMat = new THREE.LineBasicMaterial({
-            color: 0x0c202d,
+            color: 0x24282c,
             transparent: true,
-            opacity: 0.8
+            opacity: 0.7
         });
         const edgeLines = new THREE.LineSegments(edgeGeom, edgeMat);
         tower.add(edgeLines);
 
-        // Glowing Billboard Strip (Alternate Hot Magenta and Warm Amber)
-        const isMagenta = idx % 2 === 0;
-        const stripColor = isMagenta ? magentaColor : amberColor;
+        // Subtle Billboard Strip (Alternate Accent Magenta & Olive Grey Sheen)
+        const isAccent = idx % 2 === 0;
+        const stripColor = isAccent ? accentColor : oliveColor;
         const stripHeight = height * 0.55;
         const stripGeom = new THREE.PlaneGeometry(width * 0.65, stripHeight, 1, 12);
         const stripMat = new THREE.MeshBasicMaterial({
             color: stripColor,
             wireframe: true,
             transparent: true,
-            opacity: 0.75,
+            opacity: 0.55,
             blending: THREE.AdditiveBlending,
             side: THREE.DoubleSide
         });
@@ -458,18 +456,18 @@ function initHolographicCyberpunkBackground() {
     });
 
     // --------------------------------------------------------------------------
-    // C. WET OBSIDIAN TARMAC HOLOGRAPHIC FLOOR GRID
+    // C. OBSIDIAN GROUND (#090A0B) & RESTRAINED GRID
     // --------------------------------------------------------------------------
-    const floorGrid = new THREE.GridHelper(800, 40, 0x00f0ff, 0x071b26);
+    const floorGrid = new THREE.GridHelper(800, 40, 0xD63384, 0x151719);
     floorGrid.position.y = -105;
     floorGrid.material.transparent = true;
-    floorGrid.material.opacity = 0.55;
+    floorGrid.material.opacity = 0.4;
     scene.add(floorGrid);
 
-    // Deep Obsidian Water/Tarmac Plane beneath grid
+    // Deep Obsidian Water/Tarmac Plane beneath grid (#090A0B)
     const floorPlaneGeom = new THREE.PlaneGeometry(1000, 1000);
     const floorPlaneMat = new THREE.MeshBasicMaterial({
-        color: 0x03070a,
+        color: 0x090A0B,
         side: THREE.DoubleSide
     });
     const floorPlane = new THREE.Mesh(floorPlaneGeom, floorPlaneMat);
@@ -478,9 +476,9 @@ function initHolographicCyberpunkBackground() {
     scene.add(floorPlane);
 
     // --------------------------------------------------------------------------
-    // D. FLOATING HOLOGRAPHIC EMBER PARTICLES
+    // D. RESTRAINED HOLOGRAPHIC AMBIENT PARTICLES
     // --------------------------------------------------------------------------
-    const particleCount = 220;
+    const particleCount = 180;
     const particleGeom = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
@@ -491,9 +489,9 @@ function initHolographicCyberpunkBackground() {
         particlePositions[i * 3 + 2] = -400 + Math.random() * 500;
 
         const rand = Math.random();
-        let c = cyanColor;
-        if (rand > 0.6) c = magentaColor;
-        else if (rand > 0.3) c = amberColor;
+        let c = accentColor;
+        if (rand > 0.6) c = warmWhiteColor;
+        else if (rand > 0.3) c = oliveColor;
 
         particleColors[i * 3] = c.r;
         particleColors[i * 3 + 1] = c.g;
@@ -504,10 +502,10 @@ function initHolographicCyberpunkBackground() {
     particleGeom.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
 
     const particleMat = new THREE.PointsMaterial({
-        size: 3,
+        size: 2.5,
         vertexColors: true,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.65,
         blending: THREE.AdditiveBlending
     });
 
@@ -515,20 +513,26 @@ function initHolographicCyberpunkBackground() {
     scene.add(emberParticles);
 
     // --------------------------------------------------------------------------
-    // E. ANIMATION & SWIMMING DYNAMICS
+    // E. SLOW ATMOSPHERIC MOTION DYNAMICS
     // --------------------------------------------------------------------------
     const clock = new THREE.Clock();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+        // Render single calm static frame for accessibility
+        renderer.render(scene, camera);
+        return;
+    }
 
     function animateHologram() {
         requestAnimationFrame(animateHologram);
 
         const time = clock.getElapsedTime();
 
-        // 1. Holographic Cyber-Koi Swimming Trajectory across 3D Space
-        // Sinuous orbital figure-eight path through the city canyon
+        // Slow atmospheric swimming trajectory (Calm, graceful orbital figure-eight)
         const swimRadiusX = 140;
         const swimRadiusZ = 180;
-        const swimSpeed = time * 0.45;
+        const swimSpeed = time * 0.16;
 
         const currentX = Math.sin(swimSpeed) * swimRadiusX;
         const currentZ = Math.cos(swimSpeed * 0.8) * swimRadiusZ - 120;
@@ -536,39 +540,36 @@ function initHolographicCyberpunkBackground() {
 
         koiGroup.position.set(currentX, currentY, currentZ);
 
-        // Heading angle tangent to path
         const nextX = Math.sin(swimSpeed + 0.05) * swimRadiusX;
         const nextZ = Math.cos((swimSpeed + 0.05) * 0.8) * swimRadiusZ - 120;
         const nextY = Math.sin((swimSpeed + 0.05) * 1.4) * 35 - 10;
 
         koiGroup.lookAt(nextX, nextY, nextZ);
 
-        // Sinuous undulating wave along the articulated body rings
+        // Articulated gentle body ring sway
         for (let i = 0; i < SEGMENTS; i++) {
             const ring = bodyRings[i];
             const waveOffset = i * 0.28;
-            const lateralSway = Math.sin(time * 3.2 - waveOffset) * (i * 0.55);
-            const verticalSway = Math.cos(time * 2.2 - waveOffset) * (i * 0.25);
+            const lateralSway = Math.sin(time * 1.6 - waveOffset) * (i * 0.4);
+            const verticalSway = Math.cos(time * 1.1 - waveOffset) * (i * 0.18);
 
             ring.position.x = lateralSway;
             ring.position.y = verticalSway;
-
-            // Slight rotational twist
-            ring.rotation.z = Math.sin(time * 3.2 - waveOffset) * 0.15;
+            ring.rotation.z = Math.sin(time * 1.6 - waveOffset) * 0.1;
         }
 
-        // Undulate Left and Right Pectoral Fins (Rippling Wings)
+        // Gentle fin wave
         const leftFinPos = leftFin.geometry.attributes.position;
         for (let j = 0; j < leftFinPos.count; j++) {
             const vx = leftFinPos.getX(j);
-            leftFinPos.setZ(j, Math.sin(time * 4.5 + vx * 0.15) * 3.5);
+            leftFinPos.setZ(j, Math.sin(time * 2.2 + vx * 0.15) * 2.2);
         }
         leftFin.geometry.attributes.position.needsUpdate = true;
 
         const rightFinPos = rightFin.geometry.attributes.position;
         for (let j = 0; j < rightFinPos.count; j++) {
             const vx = rightFinPos.getX(j);
-            rightFinPos.setZ(j, Math.sin(time * 4.5 - vx * 0.15) * 3.5);
+            rightFinPos.setZ(j, Math.sin(time * 2.2 - vx * 0.15) * 2.2);
         }
         rightFin.geometry.attributes.position.needsUpdate = true;
 
@@ -576,17 +577,17 @@ function initHolographicCyberpunkBackground() {
         const tailPos = tailFan.geometry.attributes.position;
         for (let k = 0; k < tailPos.count; k++) {
             const vy = tailPos.getY(k);
-            tailPos.setZ(k, Math.sin(time * 3.5 + vy * 0.12) * 5.5);
+            tailPos.setZ(k, Math.sin(time * 1.8 + vy * 0.12) * 3.5);
         }
         tailFan.geometry.attributes.position.needsUpdate = true;
 
-        // 2. Rolling floor grid towards camera for dynamic wet street illusion
-        floorGrid.position.z = (time * 25) % 20;
+        // Rolling floor grid (slow, steady crawl)
+        floorGrid.position.z = (time * 8) % 20;
 
-        // 3. Floating Holographic Ember Dust Drift
+        // Gentle floating particles
         const pPos = emberParticles.geometry.attributes.position;
         for (let p = 0; p < particleCount; p++) {
-            let py = pPos.getY(p) + 0.35;
+            let py = pPos.getY(p) + 0.12;
             if (py > 160) py = -100;
             pPos.setY(p, py);
         }
@@ -720,4 +721,18 @@ function initResumeDock() {
         dock.classList.toggle('minimized');
         playTacticalClick();
     });
+}
+
+/* ==========================================================================
+   7. RESTRAINED AMBIENT CURSOR GLOW (NEVER REPLACING SYSTEM CURSOR)
+   ========================================================================== */
+
+function initRestrainedCursorGlow() {
+    const glow = document.querySelector('.ambient-cursor-glow');
+    if (!glow || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    window.addEventListener('pointermove', (e) => {
+        glow.style.left = `${e.clientX}px`;
+        glow.style.top = `${e.clientY}px`;
+    }, { passive: true });
 }
