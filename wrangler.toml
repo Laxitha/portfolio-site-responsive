@@ -1,0 +1,20 @@
+name = "portfolio-site-responsive"
+compatibility_date = "2024-09-23"
+
+[assets]
+directory = "."
+exclude = [
+  "node_modules/**",
+  "node_modules",
+  ".git/**",
+  ".git",
+  ".github/**",
+  ".wrangler/**",
+  "*.zip",
+  "*.tmp",
+  "scratch*",
+  "original_*",
+  "README.md",
+  "package*.json",
+  "wrangler.toml"
+]
