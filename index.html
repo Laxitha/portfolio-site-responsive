@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laxitha Sridhar // Cybersecurity Specialist</title>
+    <meta name="description" content="Laxitha Sridhar — Final-year B.E. CSE (Cyber Security) student with hands-on experience in Python, C and Linux across embedded-systems, testing, firmware validation, and static code analysis.">
+
+    <!-- Fonts: Silkscreen (Watch Dogs / DedSec Hacker Font), Inter, Space Grotesk, Chakra Petch, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Background Audio: Archangel soundtrack -->
+    <audio id="bg-audio" src="archangel.mp3" loop preload="auto"></audio>
+
+    <!-- Global SVG Gooey Filter for Titles inside Text Boxes -->
+    <svg class="gooey-svg-filter" style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+        <defs>
+            <filter id="gooey-marquee-filter">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="
+                    1 0 0 0 0  
+                    0 1 0 0 0  
+                    0 0 1 0 0  
+                    0 0 0 18 -7" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- 3D WebGL Background Layer (Three.js Surveillance Grid) -->
+    <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+    <!-- Ambient Visual FX Overlays -->
+    <div class="scanline-overlay" aria-hidden="true"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <div class="vignette-overlay" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+       NAVIGATION — WATCH DOGS DIGITAL OPERATIONS INTERFACE
+       ========================================================================== -->
+    <nav class="navbar" id="main-nav">
+        <div class="nav-container">
+            <!-- Brand -->
+            <a href="#hero" class="nav-brand" aria-label="Laxitha Sridhar Home">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="brand-info">
+                    <span class="brand-title glitch-header" data-text="LAXITHA.S">LAXITHA.S</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link active">FEED</a></li>
+                <li><a href="#about" class="nav-link">PROFILE</a></li>
+                <li><a href="#projects" class="nav-link">PROJECTS</a></li>
+                <li><a href="#experience" class="nav-link">EXPERIENCE</a></li>
+                <li><a href="#skills" class="nav-link">SKILLS</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+
+            <!-- Controls & Audio -->
+            <div class="nav-controls">
+
+                <button class="audio-toggle-btn" id="audio-toggle-btn" title="Toggle Archangel Soundtrack" aria-label="Toggle Sound Effects">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                    <span>AUDIO: OFF</span>
+                </button>
+
+                <a href="#contact" class="nav-cta">CONNECT</a>
+
+                <button class="nav-toggle-btn" aria-label="Toggle Navigation Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================================================
+       HERO — UNOBSTRUCTED VIDEO & SCROLLYTELLING FRAME SCRUBBER
+       The central character/video is 100% visible, unobstructed by any big box.
+       Frames scrub smoothly on scroll.
+       ========================================================================== -->
+    <div class="hero-scroll-container" id="hero">
+        <div class="hero-sticky-frame">
+            
+            <!-- Visual Viewport: Scrollytelling Canvas + Live Video Fallback -->
+            <div class="hero-visual-viewport">
+                <canvas id="hero-canvas" width="3840" height="2160"></canvas>
+                <video id="hero-video" src="hero-video.mp4" playsinline muted loop></video>
+                <div class="hero-subtle-vignette"></div>
+            </div>
+
+            <!-- Sleek Watch Dogs HUD Layer (Perimeter Only - Video Unobstructed) -->
+            <div class="hero-hud-layer">
+                <!-- Top HUD Info Bar -->
+                <div class="hud-top-bar">
+                    <div class="hud-metadata-group">
+                        <div class="hud-feed-tag">
+                            <span class="rec-indicator"></span>
+                            <span>CAMERA FEED 01 // UNDERGROUND LIVERPOOL ST</span>
+                        </div>
+                        <div class="hud-geo-tag">
+                            CTOS SURVEILLANCE // 4K ULTRA-HD FEED
+                        </div>
+                    </div>
+
+                    <div class="hud-mode-controls">
+                        <button class="hud-mode-btn active" id="btn-mode-scrub" title="Scrub frames smoothly with scroll">
+                            <span>SCROLL SCRUB</span>
+                        </button>
+                        <button class="hud-mode-btn" id="btn-mode-video" title="Play live continuous 4K video loop">
+                            <span>SHOW VIDEO</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Minimal Viewport Corner Brackets (Framing only - Nothing in the center) -->
+                <div class="hud-viewport-brackets" aria-hidden="true">
+                    <div class="corner-bracket top-left"></div>
+                    <div class="corner-bracket top-right"></div>
+                    <div class="corner-bracket bottom-left"></div>
+                    <div class="corner-bracket bottom-right"></div>
+                </div>
+
+                <!-- Faint Horizontal Scanning Beam -->
+                <div class="hud-scan-beam" aria-hidden="true"></div>
+
+                <!-- Bottom Telemetry HUD: Left Title & CTAs (Completely unblocking the center) -->
+                <div class="hud-bottom-bar">
+                    <div class="hero-identity-tag">
+                        <div class="hud-target-pill">
+                            <span class="pulse-dot"></span>
+                            <span>OPERATIVE: LAXITHA SRIDHAR</span>
+                        </div>
+                        <h1 class="hero-headline glitch-header" data-text="LAXITHA SRIDHAR">LAXITHA <span class="hacker-box-tag accent-cyan">SRIDHAR</span></h1>
+                        <p class="hero-tagline">Final-Year B.E. CSE (Cyber Security) · Embedded Systems, Firmware Auditing & Forensics</p>
+                        
+                        <div class="hero-btn-row">
+                            <a href="#projects" class="btn-primary">
+                                <span>ACCESS PROJECTS</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                            <a href="#experience" class="btn-secondary">
+                                <span>VIEW OPERATIONS</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Scroll to Scrub Guidance Indicator -->
+                    <div class="hero-scroll-prompt">
+                        <div class="scroll-anim-mouse">
+                            <span class="scroll-wheel"></span>
+                        </div>
+                        <span class="scroll-text">SCROLL TO EXPLORE</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       SECTION: PROFILE & SUMMARY (RESUME FOCUSED)
+       ========================================================================== -->
+    <section class="section-about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title glitch-header" data-text="ABOUT ME">About <span class="accent">Me</span></h2>
+                <p class="section-desc">
+                    Final-year B.E. CSE (Cyber Security) student with hands-on experience in Python, C and Linux across embedded-systems, testing and automation work.
+                </p>
+            </div>
+
+            <div class="profile-layout-grid">
+                <!-- Left: Full Resume Summary & Engineering Focus -->
+                <div class="profile-narrative-card">
+                    <div class="card-inner-header">
+                        <div class="gooey-title-box">
+                            <div class="gooey-liquid-underlay" aria-hidden="true">
+                                <span class="goo-blob goo-blob-cyan"></span>
+                                <span class="goo-blob goo-blob-magenta"></span>
+                                <span class="goo-blob goo-blob-amber"></span>
+                            </div>
+                            <div class="gooey-marquee-viewport">
+                                <div class="gooey-marquee-track">
+                                    <span class="gooey-title-text"><span class="pulse-dot"></span> PROFESSIONAL SUMMARY</span>
+                                    <span class="gooey-divider">// [CYBER_PROFILE] //</span>
+                                    <span class="gooey-title-text" aria-hidden="true"><span class="pulse-dot"></span> PROFESSIONAL SUMMARY</span>
+                                    <span class="gooey-divider" aria-hidden="true">// [CYBER_PROFILE] //</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="mono-status">VERIFIED</span>
+                    </div>
+                    <p class="summary-body">
+                        Final-year B.E. CSE (Cyber Security) student with hands-on experience in <strong>Python, C and Linux</strong> across embedded-systems, testing and automation work. Experienced in validating firmware, hardware interfaces and APIs, and in static code analysis. Looking to apply programming, software testing and documentation skills to engineering tool development and controller validation.
+                    </p>
+
+                    <!-- Core Competency Badges from Resume -->
+                    <div class="core-competencies-grid">
+                        <div class="competency-item">
+                            <div class="comp-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line></svg>
+                            </div>
+                            <div class="comp-text">
+                                <h4>Embedded & Firmware Validation</h4>
+                                <p>Hardware bus auditing (UART/JTAG) and binary reverse-engineering with Ghidra.</p>
+                            </div>
+                        </div>
+
+                        <div class="competency-item">
+                            <div class="comp-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            </div>
+                            <div class="comp-text">
+                                <h4>API & Network Protocol Testing</h4>
+                                <p>Endpoint validation, packet inspection, and vulnerability detection via Burp Suite and Wireshark.</p>
+                            </div>
+                        </div>
+
+                        <div class="competency-item">
+                            <div class="comp-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            </div>
+                            <div class="comp-text">
+                                <h4>Static Code Analysis</h4>
+                                <p>Application security analysis with Fortify Static Code Analyzer to uncover vulnerabilities in source code.</p>
+                            </div>
+                        </div>
+
+                        <div class="competency-item">
+                            <div class="comp-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </div>
+                            <div class="comp-text">
+                                <h4>Threat Operations & Defense</h4>
+                                <p>Cloudflare WAF DDoS mitigation, SentinelOne endpoint defense, and Forcepoint DLP enforcement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Education Dossier Card -->
+                <div class="education-dossier-card">
+                    <div class="card-inner-header">
+                        <div class="gooey-title-box">
+                            <div class="gooey-liquid-underlay" aria-hidden="true">
+                                <span class="goo-blob goo-blob-cyan"></span>
+                                <span class="goo-blob goo-blob-magenta"></span>
+                                <span class="goo-blob goo-blob-amber"></span>
+                            </div>
+                            <div class="gooey-marquee-viewport">
+                                <div class="gooey-marquee-track">
+                                    <span class="gooey-title-text"><span class="pulse-dot"></span> ACADEMIC BACKGROUND</span>
+                                    <span class="gooey-divider">// [DEGREE_AUDIT] //</span>
+                                    <span class="gooey-title-text" aria-hidden="true"><span class="pulse-dot"></span> ACADEMIC BACKGROUND</span>
+                                    <span class="gooey-divider" aria-hidden="true">// [DEGREE_AUDIT] //</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="mono-status">AUTHENTICATED</span>
+                    </div>
+
+                    <div class="edu-timeline">
+                        <div class="edu-block">
+                            <div class="edu-badge">2027</div>
+                            <div class="edu-content">
+                                <h3>Easwari Engineering College (SRM Group)</h3>
+                                <div class="edu-spec">B.E. Computer Science Engineering (Cyber Security)</div>
+                                <div class="edu-metric">CGPA: <strong>8.68 / 10</strong></div>
+                                <div class="edu-loc">Ramapuram, Chennai</div>
+                            </div>
+                        </div>
+
+                        <div class="edu-block">
+                            <div class="edu-badge">2023</div>
+                            <div class="edu-content">
+                                <h3>The Schram Academy</h3>
+                                <div class="edu-spec">Computer Science with Maths</div>
+                                <div class="edu-metric">XII: <strong>80%</strong> &nbsp;|&nbsp; X: <strong>84%</strong></div>
+                                <div class="edu-loc">Maduravoyal, Chennai</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Verified Metrics Telemetry -->
+                    <div class="edu-telemetry-row">
+                        <div class="telemetry-box">
+                            <span class="t-val">8.68</span>
+                            <span class="t-lbl">B.E. CGPA</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="t-val">2</span>
+                            <span class="t-lbl">Security Internships</span>
+                        </div>
+                        <div class="telemetry-box">
+                            <span class="t-val">3</span>
+                            <span class="t-lbl">Core Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION: PROJECTS (EXCLUSIVELY FROM ATTACHED RESUME)
+       - EvalX (Python, SHAP, MITRE ATT&CK)
+       - Rennaigan (Python, FastAPI, PyTorch, Hugging Face, OpenCV, React/TS)
+       - CaseFlow (Next.js, Supabase, Cytoscape.js, Vercel)
+       NO fake exposure scores, NO fake line bars with points, NO fake trust scores, NO fake mock names.
+       ========================================================================== -->
+    <section class="section-projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title glitch-header" data-text="PROJECTS">Projects</h2>
+                <p class="section-desc">
+                    Research and engineering platforms developed across digital identity risk profiling, deepfake media forensics, and investigation intelligence.
+                </p>
+            </div>
+
+            <div class="projects-list">
+
+                <!-- PROJECT 01: EvalX -->
+                <article class="project-dossier-card">
+                    <div class="project-meta-row">
+                        <span class="project-code">PROJECT // 01 · FINAL-YEAR PROJECT</span>
+                        <div class="project-tags">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">SHAP</span>
+                            <span class="tag-pill">MITRE ATT&CK</span>
+                        </div>
+                    </div>
+
+                    <div class="gooey-title-box">
+                        <div class="gooey-liquid-underlay" aria-hidden="true">
+                            <span class="goo-blob goo-blob-cyan"></span>
+                            <span class="goo-blob goo-blob-magenta"></span>
+                            <span class="goo-blob goo-blob-amber"></span>
+                        </div>
+                        <div class="gooey-marquee-viewport">
+                            <div class="gooey-marquee-track">
+                                <h3 class="gooey-title-text large">EVALX – ADAPTIVE RISK PROFILING ENGINE FOR DIGITAL IDENTITIES</h3>
+                                <span class="gooey-divider">// [MITRE ATT&CK] //</span>
+                                <h3 class="gooey-title-text large" aria-hidden="true">EVALX – ADAPTIVE RISK PROFILING ENGINE FOR DIGITAL IDENTITIES</h3>
+                                <span class="gooey-divider" aria-hidden="true">// [MITRE ATT&CK] //</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="project-bullets-list">
+                        <li>
+                            <strong>Threat Exposure Score Engine:</strong> Built a risk-scoring engine that computes a Threat Exposure Score (TES) from OSINT-based identity correlation graphs.
+                        </li>
+                        <li>
+                            <strong>Explainable Machine Learning:</strong> Integrated SHAP (SHapley Additive exPlanations) explainability so each score is interpretable, and mapped findings to the MITRE ATT&CK framework.
+                        </li>
+                        <li>
+                            <strong>IEEE Reference Architecture:</strong> Structured the system on a six-layer architecture aligned to an IEEE Access reference model.
+                        </li>
+                    </ul>
+
+                    <!-- Factual Architecture Breakdown -->
+                    <div class="project-spec-strip">
+                        <div class="spec-cell">
+                            <span class="spec-label">CORE MODEL</span>
+                            <span class="spec-val">OSINT Identity Graph Correlation</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">EXPLAINABILITY</span>
+                            <span class="spec-val">SHAP Attribution Framework</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">TACTICS MAPPED</span>
+                            <span class="spec-val">MITRE ATT&CK Framework</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">SYSTEM ARCHITECTURE</span>
+                            <span class="spec-val">Six-Layer IEEE Access Standard</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 02: Rennaigan -->
+                <article class="project-dossier-card">
+                    <div class="project-meta-row">
+                        <span class="project-code">PROJECT // 02 · FORENSIC PLATFORM</span>
+                        <div class="project-tags">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">FastAPI</span>
+                            <span class="tag-pill">PyTorch</span>
+                            <span class="tag-pill">Hugging Face</span>
+                            <span class="tag-pill">OpenCV</span>
+                            <span class="tag-pill">React/TS</span>
+                        </div>
+                    </div>
+
+                    <div class="gooey-title-box">
+                        <div class="gooey-liquid-underlay" aria-hidden="true">
+                            <span class="goo-blob goo-blob-cyan"></span>
+                            <span class="goo-blob goo-blob-magenta"></span>
+                            <span class="goo-blob goo-blob-amber"></span>
+                        </div>
+                        <div class="gooey-marquee-viewport">
+                            <div class="gooey-marquee-track">
+                                <h3 class="gooey-title-text large">RENNAIGAN – MULTIMODAL DEEPFAKE FORENSICS PLATFORM</h3>
+                                <span class="gooey-divider">// [10+ DETECTORS // SHA-256] //</span>
+                                <h3 class="gooey-title-text large" aria-hidden="true">RENNAIGAN – MULTIMODAL DEEPFAKE FORENSICS PLATFORM</h3>
+                                <span class="gooey-divider" aria-hidden="true">// [10+ DETECTORS // SHA-256] //</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="project-bullets-list">
+                        <li>
+                            <strong>Multimodal Fusion Gateway:</strong> Built the ML and backend layer of a platform analysing images, audio and video with 10+ detectors behind a FastAPI gateway, fused into a 0–100 trust score with corroboration rules against false alarms.
+                        </li>
+                        <li>
+                            <strong>Measured AUC & Gemini Integration:</strong> Selected detectors by measured AUC on labelled test sets (AI-image 0.92–0.98, voice-clone 0.95), raising image accuracy from 57 to 96 of 120; integrated a Gemini verdict step using BM25-retrieved past cases.
+                        </li>
+                        <li>
+                            <strong>High-Throughput Profiling & Audit Ledger:</strong> Cut an 8-minute video’s analysis from 40 s to 15 s by profiling; built SHA-256 hash-chained, HMAC-signed audit logs.
+                        </li>
+                    </ul>
+
+                    <!-- Factual Technical Metrics Strip -->
+                    <div class="project-spec-strip">
+                        <div class="spec-cell">
+                            <span class="spec-label">DETECTOR ENSEMBLE</span>
+                            <span class="spec-val">10+ Fused Visual & Acoustic Models</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">VALIDATED AUC</span>
+                            <span class="spec-val">Image: 0.92–0.98 · Voice: 0.95</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">SPEED PROFILE</span>
+                            <span class="spec-val">40s &rarr; 15s (8-min video)</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">AUDIT INTEGRITY</span>
+                            <span class="spec-val">SHA-256 Chained, HMAC-Signed</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PROJECT 03: CaseFlow -->
+                <article class="project-dossier-card">
+                    <div class="project-meta-row">
+                        <span class="project-code">PROJECT // 03 · INVESTIGATION INTELLIGENCE</span>
+                        <div class="project-tags">
+                            <span class="tag-pill">Next.js</span>
+                            <span class="tag-pill">Supabase</span>
+                            <span class="tag-pill">Cytoscape.js</span>
+                            <span class="tag-pill">Vercel</span>
+                        </div>
+                    </div>
+
+                    <div class="gooey-title-box">
+                        <div class="gooey-liquid-underlay" aria-hidden="true">
+                            <span class="goo-blob goo-blob-cyan"></span>
+                            <span class="goo-blob goo-blob-magenta"></span>
+                            <span class="goo-blob goo-blob-amber"></span>
+                        </div>
+                        <div class="gooey-marquee-viewport">
+                            <div class="gooey-marquee-track">
+                                <h3 class="gooey-title-text large">CASEFLOW – INVESTIGATION INTELLIGENCE PLATFORM</h3>
+                                <span class="gooey-divider">// [KNOWLEDGE GRAPH // AGENT] //</span>
+                                <h3 class="gooey-title-text large" aria-hidden="true">CASEFLOW – INVESTIGATION INTELLIGENCE PLATFORM</h3>
+                                <span class="gooey-divider" aria-hidden="true">// [KNOWLEDGE GRAPH // AGENT] //</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="project-bullets-list">
+                        <li>
+                            <strong>Knowledge Graph Resolution:</strong> Built a platform that resolves case data (CDRs, FIRs, financial records) into an interactive knowledge graph.
+                        </li>
+                        <li>
+                            <strong>Evidence-Backed Lead Generation:</strong> Developed evidence-backed risk scoring, lead generation and an AI agent for natural-language case queries.
+                        </li>
+                    </ul>
+
+                    <!-- Factual Technical Specs Strip -->
+                    <div class="project-spec-strip">
+                        <div class="spec-cell">
+                            <span class="spec-label">GRAPH ENGINE</span>
+                            <span class="spec-val">Cytoscape.js Graph Resolution</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">DATA RESOLVED</span>
+                            <span class="spec-val">CDRs, FIRs, Financial Records</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">QUERY INTERFACE</span>
+                            <span class="spec-val">Natural-Language AI Agent</span>
+                        </div>
+                        <div class="spec-cell">
+                            <span class="spec-label">DEPLOYMENT</span>
+                            <span class="spec-val">Next.js · Supabase · Vercel</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION: WORK EXPERIENCE (EXCLUSIVELY FROM RESUME)
+       - Qmax Systems India Pvt Ltd (Nov 2025 – Jan 2026, Poonamallee)
+       - Hinduja Tech Limited (May 2025 – Jun 2025, Perungulathur)
+       NO "STATUS // MISSION ACCOMPLISHED"
+       ========================================================================== -->
+    <section class="section-experience" id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title glitch-header" data-text="WORK EXPERIENCE">Work <span class="accent">Experience</span></h2>
+                <p class="section-desc">
+                    Field experience across industrial embedded security, firmware reverse engineering, VAPT, and enterprise threat operations.
+                </p>
+            </div>
+
+            <div class="experience-timeline">
+
+                <!-- Role 01: Qmax Systems -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-company-group">
+                            <div class="gooey-title-box">
+                                <div class="gooey-liquid-underlay" aria-hidden="true">
+                                    <span class="goo-blob goo-blob-cyan"></span>
+                                    <span class="goo-blob goo-blob-magenta"></span>
+                                    <span class="goo-blob goo-blob-amber"></span>
+                                </div>
+                                <div class="gooey-marquee-viewport">
+                                    <div class="gooey-marquee-track">
+                                        <h3 class="gooey-title-text large">QMAX SYSTEMS INDIA PVT LTD</h3>
+                                        <span class="gooey-divider">// [EMBEDDED SYSTEMS SECURITY] //</span>
+                                        <h3 class="gooey-title-text large" aria-hidden="true">QMAX SYSTEMS INDIA PVT LTD</h3>
+                                        <span class="gooey-divider" aria-hidden="true">// [EMBEDDED SYSTEMS SECURITY] //</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="exp-role">Embedded Systems Security Intern</div>
+                        </div>
+                        <div class="exp-meta-group">
+                            <div class="exp-duration">Nov 2025 – Jan 2026</div>
+                            <div class="exp-location">Poonamallee, Chennai</div>
+                        </div>
+                    </div>
+
+                    <ul class="exp-bullets">
+                        <li>
+                            Assessed hardware interfaces (UART/JTAG) and firmware of embedded and IoT devices used in industrial applications; analysed firmware with Ghidra to identify vulnerabilities.
+                        </li>
+                        <li>
+                            Tested device communication, APIs and endpoints using Wireshark and Burp Suite to validate behaviour and detect insecure communication.
+                        </li>
+                        <li>
+                            Contributed to embedded systems and IoT-based engineering solutions across industrial applications.
+                        </li>
+                    </ul>
+
+                    <div class="exp-toolset">
+                        <span class="tool-tag">UART / JTAG</span>
+                        <span class="tool-tag">Ghidra</span>
+                        <span class="tool-tag">Wireshark</span>
+                        <span class="tool-tag">Burp Suite</span>
+                        <span class="tool-tag">Embedded Systems</span>
+                        <span class="tool-tag">IoT Security</span>
+                    </div>
+                </div>
+
+                <!-- Role 02: Hinduja Tech Limited -->
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <div class="exp-company-group">
+                            <div class="gooey-title-box">
+                                <div class="gooey-liquid-underlay" aria-hidden="true">
+                                    <span class="goo-blob goo-blob-cyan"></span>
+                                    <span class="goo-blob goo-blob-magenta"></span>
+                                    <span class="goo-blob goo-blob-amber"></span>
+                                </div>
+                                <div class="gooey-marquee-viewport">
+                                    <div class="gooey-marquee-track">
+                                        <h3 class="gooey-title-text large">HINDUJA TECH LIMITED</h3>
+                                        <span class="gooey-divider">// [CYBER-SECURITY INTERN] //</span>
+                                        <h3 class="gooey-title-text large" aria-hidden="true">HINDUJA TECH LIMITED</h3>
+                                        <span class="gooey-divider" aria-hidden="true">// [CYBER-SECURITY INTERN] //</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="exp-role">Cyber-Security Intern</div>
+                        </div>
+                        <div class="exp-meta-group">
+                            <div class="exp-duration">May 2025 – Jun 2025</div>
+                            <div class="exp-location">Perungulathur, Chennai</div>
+                        </div>
+                    </div>
+
+                    <ul class="exp-bullets">
+                        <li>
+                            Performed static code analysis with Fortify Static Code Analyzer to uncover vulnerabilities in application code.
+                        </li>
+                        <li>
+                            Monitored and mitigated threats across cloud, application and endpoint layers; blocked DDoS attacks via Cloudflare WAF.
+                        </li>
+                        <li>
+                            Enforced data-protection policies with Forcepoint DLP and secured endpoints against active threats with SentinelOne.
+                        </li>
+                    </ul>
+
+                    <div class="exp-toolset">
+                        <span class="tool-tag">Fortify SCA</span>
+                        <span class="tool-tag">Cloudflare WAF</span>
+                        <span class="tool-tag">SentinelOne</span>
+                        <span class="tool-tag">Forcepoint DLP</span>
+                        <span class="tool-tag">DDoS Mitigation</span>
+                        <span class="tool-tag">Endpoint Security</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION: SKILLS & CERTIFICATIONS (EXCLUSIVELY FROM RESUME)
+       Title: Skills & Certifications (dropped the name "Arsenal Modules")
+       Categories:
+       - Programming
+       - Tools & Version Control
+       - Testing & Analysis
+       - Security Platforms
+       - Certifications
+       ========================================================================== -->
+    <section class="section-skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title glitch-header" data-text="SKILLS & CERTIFICATIONS">Skills & <span class="accent">Certifications</span></h2>
+                <p class="section-desc">
+                    Comprehensive technical toolkit organized strictly around languages, developer tooling, security analysis, platforms, and industry certifications.
+                </p>
+            </div>
+
+            <div class="skills-category-grid">
+
+                <!-- Programming -->
+                <div class="skill-category-card">
+                    <div class="cat-header">
+                        <div class="gooey-title-box">
+                            <div class="gooey-liquid-underlay" aria-hidden="true">
+                                <span class="goo-blob goo-blob-cyan"></span>
+                                <span class="goo-blob goo-blob-magenta"></span>
+                            </div>
+                            <div class="gooey-marquee-viewport">
+                                <div class="gooey-marquee-track">
+                                    <div class="gooey-title-text">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                        <span>PROGRAMMING</span>
+                                    </div>
+                                    <span class="gooey-divider">// [CORE] //</span>
+                                    <div class="gooey-title-text" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                        <span>PROGRAMMING</span>
+                                    </div>
+                                    <span class="gooey-divider" aria-hidden="true">// [CORE] //</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-pill-list">
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">C</span>
+                        <span class="skill-pill">JavaScript</span>
+                        <span class="skill-pill">HTML/CSS</span>
+                        <span class="skill-pill">SQL (MySQL, SQLite)</span>
+                        <span class="skill-pill">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Tools & Version Control -->
+                <div class="skill-category-card">
+                    <div class="cat-header">
+                        <div class="gooey-title-box">
+                            <div class="gooey-liquid-underlay" aria-hidden="true">
+                                <span class="goo-blob goo-blob-cyan"></span>
+                                <span class="goo-blob goo-blob-magenta"></span>
+                            </div>
+                            <div class="gooey-marquee-viewport">
+                                <div class="gooey-marquee-track">
+                                    <div class="gooey-title-text">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                                        <span>TOOLS & VERSION CONTROL</span>
+                                    </div>
+                                    <span class="gooey-divider">// [ENV & CLI] //</span>
+                                    <div class="gooey-title-text" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                                        <span>TOOLS & VERSION CONTROL</span>
+                                    </div>
+                                    <span class="gooey-divider" aria-hidden="true">// [ENV & CLI] //</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-pill-list">
+                        <span class="skill-pill">Git</span>
+                        <span class="skill-pill">GitHub</span>
+                        <span class="skill-pill">Linux</span>
+                        <span class="skill-pill">Jupyter Notebook</span>
+                        <span class="skill-pill">VS Code</span>
+                        <span class="skill-pill">AWS</span>
+                    </div>
+                </div>
+
+                <!-- Testing & Analysis -->
+                <div class="skill-category-card">
+                    <div class="cat-header">
+                        <div class="gooey-title-box">
+                            <div class="gooey-liquid-underlay" aria-hidden="true">
+                                <span class="goo-blob goo-blob-cyan"></span>
+                                <span class="goo-blob goo-blob-magenta"></span>
+                            </div>
+                            <div class="gooey-marquee-viewport">
+                                <div class="gooey-marquee-track">
+                                    <div class="gooey-title-text">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                        <span>TESTING & ANALYSIS</span>
+                                    </div>
+                                    <span class="gooey-divider">// [AUDIT & VAPT] //</span>
+                                    <div class="gooey-title-text" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                        <span>TESTING & ANALYSIS</span>
+                                    </div>
+                                    <span class="gooey-divider" aria-hidden="true">// [AUDIT & VAPT] //</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-pill-list">
+                        <span class="skill-pill">Fortify SCA (static analysis)</span>
+                        <span class="skill-pill">Burp Suite (API/endpoint testing)</span>
+                        <span class="skill-pill">Wireshark</span>
+                        <span class="skill-pill">Ghidra</span>
+                        <span class="skill-pill">Splunk</span>
+                    </div>
+                </div>
+
+                <!-- Security Platforms -->
+                <div class="skill-category-card">
+                    <div class="cat-header">
+                        <div class="gooey-title-box">
+                            <div class="gooey-liquid-underlay" aria-hidden="true">
+                                <span class="goo-blob goo-blob-cyan"></span>
+                                <span class="goo-blob goo-blob-magenta"></span>
+                            </div>
+                            <div class="gooey-marquee-viewport">
+                                <div class="gooey-marquee-track">
+                                    <div class="gooey-title-text">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                        <span>SECURITY PLATFORMS</span>
+                                    </div>
+                                    <span class="gooey-divider">// [DEFENSE & SOC] //</span>
+                                    <div class="gooey-title-text" aria-hidden="true">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                        <span>SECURITY PLATFORMS</span>
+                                    </div>
+                                    <span class="gooey-divider" aria-hidden="true">// [DEFENSE & SOC] //</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills-pill-list">
+                        <span class="skill-pill">Cloudflare WAF</span>
+                        <span class="skill-pill">SentinelOne</span>
+                        <span class="skill-pill">Forcepoint DLP</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Certifications Section -->
+            <div class="certifications-deck">
+                <div class="deck-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <span>OFFICIAL CERTIFICATIONS</span>
+                </div>
+
+                <div class="cert-grid">
+                    <div class="cert-card">
+                        <span class="cert-badge">NPTEL</span>
+                        <h4>Applied AI</h4>
+                        <p>NPTEL Certification</p>
+                    </div>
+
+                    <div class="cert-card">
+                        <span class="cert-badge">CISCO</span>
+                        <h4>Networking Basics</h4>
+                        <p>Switching, Routing & Wireless Essentials – Cisco</p>
+                    </div>
+
+                    <div class="cert-card">
+                        <span class="cert-badge">MONGODB</span>
+                        <h4>MongoDB Basics</h4>
+                        <p>NoSQL Database Fundamentals</p>
+                    </div>
+
+                    <div class="cert-card">
+                        <span class="cert-badge">AWS</span>
+                        <h4>ML, Cloud & GenAI</h4>
+                        <p>AWS Cloud & Artificial Intelligence</p>
+                    </div>
+
+                    <div class="cert-card">
+                        <span class="cert-badge">EDC IIT DELHI</span>
+                        <h4>Generative AI & Agentic AI</h4>
+                        <p>EDC IIT Delhi Certification</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership & Achievements -->
+            <div class="achievements-split-row">
+                <!-- Leadership -->
+                <div class="leadership-card">
+                    <div class="achieve-card-header">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <span>LEADERSHIP</span>
+                    </div>
+                    <ul class="achieve-list">
+                        <li>
+                            <strong>Community Service Director</strong>
+                            <span>Rotary DAC, 2026–27</span>
+                        </li>
+                        <li>
+                            <strong>Chapter Lead</strong>
+                            <span>NexGenCyberWomen EEC</span>
+                        </li>
+                        <li>
+                            <strong>PR Officer</strong>
+                            <span>Computer Science Department</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Achievements -->
+                <div class="achievements-card">
+                    <div class="achieve-card-header">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                        <span>ACHIEVEMENTS</span>
+                    </div>
+                    <ul class="achieve-list">
+                        <li>
+                            <strong>1st Place – Hackathon</strong>
+                            <span>Karunya Institute of Technology and Sciences</span>
+                        </li>
+                        <li>
+                            <strong>3rd Place – Project Expo</strong>
+                            <span>Industry 4.0 Project Expo</span>
+                        </li>
+                        <li>
+                            <strong>3x Inter-college CTF Winner</strong>
+                            <span>Capture The Flag Competitions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       SECTION: CONTACT / TRANSMISSION DISPATCH
+       ========================================================================== -->
+    <section class="section-contact" id="contact">
+        <div class="container">
+            <div class="contact-terminal-wrapper">
+                
+                <!-- Terminal Header Bar -->
+                <div class="terminal-titlebar">
+                    <div class="terminal-dots">
+                        <span class="dot-red"></span>
+                        <span class="dot-yellow"></span>
+                        <span class="dot-green"></span>
+                    </div>
+                    <span>CTOS COMMUNICATIONS TERMINAL // NODE 0x7F</span>
+                    <span class="status-live-text">ONLINE</span>
+                </div>
+
+                <div class="terminal-inner">
+                    <h2 class="contact-headline glitch-header" data-text="ESTABLISH CONNECTION">Establish <span class="accent-cyan">Connection</span></h2>
+                    <p class="contact-subtext">
+                        Seeking engineering tool development, embedded systems validation, firmware testing, cybersecurity opportunities and conversations over watch dogs?
+                    </p>
+
+                    <!-- Contact Channels directly from Resume -->
+                    <div class="contact-nodes-grid">
+                        <a href="mailto:laxitasridhar@gmail.com" class="contact-channel-card">
+                            <div class="channel-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                            <div class="channel-meta">
+                                <h4>EMAIL</h4>
+                                <p>laxitasridhar@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Laxitha" target="_blank" rel="noopener noreferrer" class="contact-channel-card">
+                            <div class="channel-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </div>
+                            <div class="channel-meta">
+                                <h4>GITHUB</h4>
+                                <p>github.com/Laxitha</p>
+                            </div>
+                        </a>
+
+                        <a href="tel:+917200134034" class="contact-channel-card">
+                            <div class="channel-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            </div>
+                            <div class="channel-meta">
+                                <h4>TELEPHONE</h4>
+                                <p>+91 72001 34034</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Direct Dispatch Form -->
+                    <div class="terminal-dispatch-box">
+                        <div class="gooey-title-box">
+                            <div class="gooey-liquid-underlay" aria-hidden="true">
+                                <span class="goo-blob goo-blob-cyan"></span>
+                                <span class="goo-blob goo-blob-magenta"></span>
+                                <span class="goo-blob goo-blob-amber"></span>
+                            </div>
+                            <div class="gooey-marquee-viewport">
+                                <div class="gooey-marquee-track">
+                                    <div class="gooey-title-text">TRANSMIT MESSAGE DIRECTLY</div>
+                                    <span class="gooey-divider">// [SECURE DISPATCH NODE] //</span>
+                                    <div class="gooey-title-text" aria-hidden="true">TRANSMIT MESSAGE DIRECTLY</div>
+                                    <span class="gooey-divider" aria-hidden="true">// [SECURE DISPATCH NODE] //</span>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="terminal-dispatch-form">
+                            <div class="dispatch-form-group">
+                                <input type="text" id="dispatch-sender-name" class="tactical-input" placeholder="NAME / CALLSIGN" required>
+                                <input type="email" id="dispatch-sender-email" class="tactical-input" placeholder="EMAIL ADDRESS" required>
+                                <textarea id="dispatch-sender-msg" class="tactical-textarea" placeholder="Enter inquiry, opportunity details, or collaboration note..." required></textarea>
+                            </div>
+                            <div class="dispatch-submit-row">
+                                <button type="submit" id="btn-dispatch-send" class="btn-primary">
+                                    <span>SEND MESSAGE</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                                </button>
+                                <div class="system-status-final">
+                                    <span class="pulse-dot"></span>
+                                    <span>SYSTEM READY</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-left">
+                    <span class="brand">LAXITHA SRIDHAR</span>
+                    <span>//</span>
+                    <span>B.E. CSE (CYBER SECURITY)</span>
+                    <span>//</span>
+                    <span>CHENNAI, INDIA</span>
+                </div>
+                <div class="footer-right">
+                    <a href="#hero">TOP</a>
+                    <a href="#about">PROFILE</a>
+                    <a href="#projects">PROJECTS</a>
+                    <a href="#experience">EXPERIENCE</a>
+                    <a href="#skills">SKILLS</a>
+                    <a href="#contact">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ==========================================================================
+       PERSISTENT FLOATING SIDE POPUP: RESUME DOWNLOAD (ALWAYS VISIBLE)
+       ========================================================================== -->
+    <aside class="floating-resume-dock" id="floating-resume-dock" aria-label="Download Resume">
+        <div class="dock-header">
+            <div class="dock-pulse-indicator">
+                <span class="dock-pulse-dot"></span>
+                <span>RESUME // PDF</span>
+            </div>
+            <button class="dock-toggle-btn" id="dock-toggle-btn" aria-label="Toggle Resume Popup" title="Minimize / Expand">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+        <div class="dock-content" id="dock-content">
+            <div class="dock-file-badge">
+                <div class="dock-icon-box">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </div>
+                <div class="dock-file-meta">
+                    <span class="dock-filename">Laxitha_Sridhar_Resume.pdf</span>
+                    <span class="dock-file-tag">B.E. CSE · Cyber Security</span>
+                </div>
+            </div>
+            <div class="dock-actions-row">
+                <a href="Laxitha_Sridhar_Resume.pdf" download="Laxitha_Sridhar_Resume.pdf" class="btn-dock-download">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>DOWNLOAD</span>
+                </a>
+                <a href="Laxitha_Sridhar_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-dock-view" title="Open in New Tab">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    <span>VIEW</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Three.js (Local Bundle) -->
+    <script src="js/three.min.js"></script>
+
+    <!-- Main Interactive Script -->
+    <script src="js/app.js"></script>
+
+</body>
+</html>
